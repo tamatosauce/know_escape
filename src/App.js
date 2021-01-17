@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import room from './bg.png';
 import './App.css';
 import ImageMapper from "react-image-mapper"
@@ -12,7 +12,8 @@ function App() {
   const clickHandler = (area) => {
     console.log(area);
     setIsOpen(!isOpen);
-    setPopupContent({name: area.name, content: renderSwitch(area.title)})
+    setPopupContent({name: area.name, content: renderSwitch(area.title)});
+    setIsComponentVisible(true);
 
   }
 
@@ -68,6 +69,31 @@ function App() {
     }
   }
 
+  const useComponentVisible = (initialIsVisible) => {
+    const [isComponentVisible, setIsComponentVisible] = useState(
+      initialIsVisible
+    );
+    const ref = useRef(null);
+    const handleClickOutside = () => {
+        setIsOpen(false);
+    };
+  
+    useEffect(() => {
+      document.addEventListener("click", handleClickOutside, true);
+      return () => {
+        document.removeEventListener("click", handleClickOutside, true);
+      };
+    });
+  
+    return { ref, isComponentVisible, setIsComponentVisible };
+  }
+
+  const {
+    ref,
+    isComponentVisible,
+    setIsComponentVisible
+  } = useComponentVisible(true);
+
   const map = {
     name: "dentist",
     areas: [
@@ -96,16 +122,18 @@ function App() {
     <div className="App">
       <div className="title">THE DENTIST</div>
         <div className="container">
-          {isOpen && 
-          <Popup
-            content={
-            <>
-              <b>{popupContent.name}</b>
-              <p>{popupContent.content}</p>
-            </>
-          }
-            handleClose={clickHandler}
-          />}
+          <div className="popup" ref={ref}>
+            {isOpen && isComponentVisible &&
+            <Popup
+              content={
+              <>
+                <b>{popupContent.name}</b>
+                <p>{popupContent.content}</p>
+              </>
+            }
+              handleClose={clickHandler}
+            />}
+          </div>
           <ImageMapper 
             className="mapper"
             data-tip data-for="registerTip"
