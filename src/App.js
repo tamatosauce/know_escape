@@ -3,6 +3,7 @@ import room from './bg.png';
 import './App.css';
 import ImageMapper from "react-image-mapper"
 import Popup from './Popup';
+import Note from './Note';
 
 function App() {
   
@@ -118,10 +119,70 @@ function App() {
     ]
   }
 
+  const notes = [
+    {
+      key: 1,
+      title: "DEMILAC MEDICAL",
+      content:
+        ""
+    },
+    {
+      key: 2,
+      title: "Degree 1",
+      content:
+        "DDS \n Riverwood Dental School \n Exelton University \n Natura ingenium disecta \n Awarded to \n Michael Stephens \n Executed by \n Lauren Grant"
+    },
+    {
+      key: 3,
+      title: "Degree 2",
+      content:
+        "Eesgni lekesesnot erriuqse pusreivnois"
+    },
+    {
+      key: 4,
+      title: "Denture",
+      content:
+        "Model 1 - Missing Tooth \n Model 2 - Crack Central Incisor \n  Model 3 - loose filling \n Model - 4 all of the above "
+    },
+    {
+      key: 5,
+      title: "Chair Note",
+      content: "Door Emergency Release Look For Hot Spot"
+    },
+    {
+      key: 6,
+      title: "Computer Chair",
+      content: "Without even trying you can see three things wrong with it. First the wheels have fallen off, so it scrapes across the floor. Second, one of the armrests are shorter than the other. And third, the fabric on the back rest is two different colours - most of it is red but there's a shiny black patch near the bottom. It's as if who ever built this wasn't even trying."
+    },
+    {
+      key: 7,
+      title: "Book",
+      content: "Often, only every third issue that comes up is relevant. In dentistry, a patient's third complaint will be the most important. In carpentry, the third mechanical oddity is the first that needs fixing."
+    },
+    {
+      key: 8,
+      title: "Patients",
+      content: "Ericson: Upper Central Incisor Crack \n Molvis: Upper Second Molar Root Canal \n Wussel: Lower Cuspid Crack"
+    },
+    {
+      key: 9,
+      title: "FLBARLXNENAACACNZH",
+      content: ""
+    }
+    
+  ];
+
+
   return (
     <div className="App">
       <div className="title">THE DENTIST</div>
         <div className="container">
+          <div className="notes">
+            {notes.map(note => (
+              <Note key={note.key} title={note.title} content={note.content} />
+            ))}
+          </div>
+          
           <div className="popup" ref={ref}>
             {isOpen && isComponentVisible &&
             <Popup
