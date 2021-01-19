@@ -203,7 +203,7 @@ function App() {
             onMouseLeave={area => leaveArea(area)} 
             src={room} 
             map={map}
-            imgWidth={800} 
+            imgWidth={500} 
             lineWidth={0.1}
             fillColor="rgba(0,0,0,0.001)"
           />
