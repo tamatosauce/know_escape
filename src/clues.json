@@ -1,0 +1,78 @@
+{
+    "leadingText": "All about",
+    "slides": [
+      {
+        "introline": "Viken",
+        "id": "dogs",
+        "content": {
+          "image": "https://via.placeholder.com/400x200?text=Dogs",
+          "copy": "Dog ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan est ornare, ultricies erat a, dapibus lectus."
+        }
+      },
+      {
+        "introline": "Oslo",
+        "id": "elephants",
+        "content": {
+          "image": "https://via.placeholder.com/400x200?text=Elephants",
+          "copy": "Elephant ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan est ornare, ultricies erat a, dapibus lectus."
+        }
+      },
+      {
+        "introline": "Agder",
+        "id": "bears",
+        "content": {
+          "image": "https://via.placeholder.com/400x200?text=Bears",
+          "copy": "Bears ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan est ornare, ultricies erat a, dapibus lectus."
+        }
+      },
+      {
+        "introline": "Trøndelag",
+        "id": "lizards",
+        "content": {
+          "image": "https://via.placeholder.com/400x200?text=Lizards",
+          "copy": "Lizards ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan est ornare, ultricies erat a, dapibus lectus."
+        }
+      },
+      {
+        "introline": "Innlandet",
+        "id": "snakes",
+        "content": {
+          "image": "https://via.placeholder.com/400x200?text=Snakes",
+          "copy": "Snakes ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan est ornare, ultricies erat a, dapibus lectus."
+        }
+      },
+      {
+        "introline": "Møre og Romsdal",
+        "id": "cats",
+        "content": {
+          "image": "https://via.placeholder.com/400x200?text=Cats",
+          "copy": "Cats ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan est ornare, ultricies erat a, dapibus lectus."
+        }
+      },
+      {
+        "introline": "Nordland",
+        "id": "giraffes",
+        "content": {
+          "image": "https://via.placeholder.com/400x200?text=Giraffes",
+          "copy": "Giraffes ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan est ornare, ultricies erat a, dapibus lectus."
+        }
+      },
+      {
+        "introline": "Vestland",
+        "id": "owls",
+        "content": {
+          "image": "https://via.placeholder.com/400x200?text=Owls",
+          "copy": "Owls ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan est ornare, ultricies erat a, dapibus lectus."
+        }
+      },
+      {
+        "introline": "Rogaland",
+        "id": "horses",
+        "content": {
+          "image": "https://via.placeholder.com/400x200?text=horses",
+          "copy": "Horses ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan est ornare, ultricies erat a, dapibus lectus."
+        }
+      }
+    ]
+  }
+  

@@ -4,8 +4,18 @@ import './App.css';
 import ImageMapper from "react-image-mapper"
 import Popup from './Popup';
 import Note from './Note';
+import clues from "./clues.json";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import TodoForm from "./TodoForm";
+import AppBar from "material-ui/AppBar";
+
 
 function App() {
+
+  const styles = {
+    fontFamily: "sans-serif",
+    textAlign: "center"
+  };
   
   const [isOpen, setIsOpen] = useState(false);
   const [popupContent, setPopupContent] = useState({name: '', content: ''});
@@ -178,9 +188,15 @@ function App() {
       <div className="title">THE DENTIST</div>
         <div className="container">
           <div className="notes">
-            {notes.map(note => (
+            <MuiThemeProvider>
+              <div style={styles}>
+                <AppBar title="React Todo" showMenuIconButton={false} />
+                <TodoForm />
+              </div>
+            </MuiThemeProvider>
+            {/* {notes.map(note => (
               <Note key={note.key} title={note.title} content={note.content} />
-            ))}
+            ))} */}
           </div>
           
           <div className="popup" ref={ref}>
@@ -196,14 +212,14 @@ function App() {
             />}
           </div>
           <ImageMapper 
-            className="mapper"
             data-tip data-for="registerTip"
             onClick={area => clickHandler(area)}
             onMouseEnter={area => enterArea(area)}
             onMouseLeave={area => leaveArea(area)} 
             src={room} 
             map={map}
-            imgWidth={500} 
+            width={800}
+            imgWidth={800} 
             lineWidth={0.1}
             fillColor="rgba(0,0,0,0.001)"
           />

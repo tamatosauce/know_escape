@@ -1,0 +1,8 @@
+.todoCompleted {
+    text-decoration: line-through;
+    color: red;
+  }
+  
+  li {
+    list-style: none;
+  }
