@@ -12,7 +12,7 @@ const Div = styled.div`
 
 const TodoList = (props) => {
 
-  const todos = props?.todos;
+  const todos = props.todos;
 
   console.log(todos, 'er');
 
@@ -29,7 +29,7 @@ const TodoList = (props) => {
       <Div visible={props.todos.length === 0 ? 'none' : 'block'}>
         <Paper zDepth={2} rounded={false}>
           <List>
-            { todos && todos.todoText !== "" ? (todos.map(todo => {
+            { todos != "" && todos.todoText !== "" ? (todos.map(todo => {
               console.log(todo, 'todo');
               return (
                 <ListItem

@@ -21,29 +21,6 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [todoText, setTodoText] = useState('');
 
-  const handleSubmit = () => {
-
-    console.log(...todos);
-
-    setTodos(...todos,
-      {
-        todoText: todoText,
-        id: todos.length + 1,
-        completed: false,
-      }
-    );
-
-    clearTodoText();
-  }
-
-  const clearTodoText = () => {
-    setTodoText('');
-  }
-
-  const handleChange = (title) => {
-    setTodoText(title);
-  }
-
   const handleListItemClicked = (todo) => {
     console.log(todo, 'handleListItemCLicked');
     let todosInState = todos;
@@ -62,12 +39,19 @@ function App() {
   }
 
   const clickHandler = (area) => {
-    console.log(area);
+    console.log('click handler');
     setIsOpen(!isOpen);
     setPopupContent({name: area.name, content: renderSwitch(area.title)});
     setIsComponentVisible(true);
-    handleChange(area.title)
-    handleSubmit(area);
+
+    //notes
+    setTodoText(area.name);
+
+    const inputVal = {todoText: area.name, id: todos.length + 1, completed: false}
+    setTodos([...todos, inputVal]);
+
+    console.log(todos, 'wut');
+    setTodoText('');
 
   }
 
@@ -233,7 +217,7 @@ function App() {
             <MuiThemeProvider>
               <div style={styles}>
                 <TodoList
-                    todos={todos}
+                    todos={todos ? todos : null}
                     onListItemClicked={handleListItemClicked}
                   />
               </div>
