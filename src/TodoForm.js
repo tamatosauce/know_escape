@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import TodoList from './TodoList';
@@ -7,82 +7,72 @@ const style = {
   margin: 12,
 };
 
-class TodoForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todoText: '',
-      todos: [],
-    };
+const TodoForm = props => {
+  const [todoText, setTodoText] = useState();
+  const [todos, setTodos] = useState([{todoText: "Red Chair", id: 1, completed: false}, {todoText: "Bucket", id: 2, completed: false}]);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleListItemClicked = this.handleListItemClicked.bind(this);
-  }
-
-  handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({
-      todos: [
-        ...this.state.todos,
-        {
-          todoText: this.state.todoText,
-          id: this.state.todos.length + 1,
-          completed: false,
-        },
-      ],
-    });
 
-    this.clearTodoText();
+    setTodos(...todos,
+      {
+        todoText: todos.todoText,
+        id: todos.length + 1,
+        completed: false,
+      }
+    );
+
+    clearTodoText();
   }
 
-  clearTodoText() {
-    this.setState({ todoText: '' });
+  const clearTodoText = () => {
+    setTodoText('');
   }
 
-  handleChange(event) {
-    this.setState({ todoText: event.target.value });
+  const handleChange = (event) => {
+    setTodoText();
   }
 
-  handleListItemClicked(todo) {
-    let todosInState = this.state.todos;
+  const handleListItemClicked = (todo) => {
+    console.log(todo, 'handleListItemCLicked');
+    let todosInState = todos;
     let todoIndex = todo.id - 1;
+    console.log(todoIndex);
 
     if (todosInState.indexOf(todo) !== -1) {
       let todoState = todosInState[todoIndex];
       todoState.completed = !todo.completed;
 
       todosInState[todoIndex] = todoState;
+      console.log(todosInState, 'hree');
 
-      this.setState({ todos: todosInState });
+      setTodos( todosInState );
     }
   }
 
-  render() {
-    return (
+  return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <TextField
+        <form onSubmit={handleSubmit}>
+          {/* <TextField
             id="txttodoText"
             hintText="Enter a todo"
             floatingLabelText="Enter a todo"
-            value={this.state.todoText}
-            onChange={this.handleChange}
+            value={todo.todoText}
+            onChange={handleChange}
           />
           <RaisedButton
             label="Submit"
             primary={true}
             style={style}
-            onClick={this.handleSubmit}
-          />
+            onClick={handleSubmit}
+          /> */}
         </form>
         <TodoList
-          todos={this.state.todos}
-          onListItemClicked={this.handleListItemClicked}
+          todos={todos}
+          onListItemClicked={handleListItemClicked}
         />
       </div>
     );
   }
-}
 
 export default TodoForm;

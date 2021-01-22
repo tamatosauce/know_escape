@@ -7,32 +7,30 @@ import styled from 'styled-components';
 const Div = styled.div`
   width: 50%;
   margin: 0 auto;
-  display: ${props => props.visible};
+  display: block;
 `;
 
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
+const TodoList = (props) => {
 
-    this.handleClick = this.handleClick.bind(this);
-    this.handleCheck = this.handleCheck.bind(this);
+  const todos = props?.todos;
+
+  console.log(todos, 'er');
+
+  const handleCheck = (todo) => {
+    props.onListItemClicked(todo);
   }
 
-  handleCheck(todo, event) {
-    this.props.onListItemClicked(todo);
+  const handleClick = (todo) => {
+    props.onListItemClicked(todo);
   }
 
-  handleClick(todo, event) {
-    this.props.onListItemClicked(todo);
-  }
-
-  render() {
-    const show = this.props.todos.length === 0 ? 'inVis' : '';
+    const show = props.todos.length === 0 ? 'inVis' : '';
     return (
-      <Div visible={this.props.todos.length === 0 ? 'none' : 'block'}>
+      <Div visible={props.todos.length === 0 ? 'none' : 'block'}>
         <Paper zDepth={2} rounded={false}>
           <List>
-            {this.props.todos.map(todo => {
+            { todos && todos.todoText !== "" ? (todos.map(todo => {
+              console.log(todo, 'todo');
               return (
                 <ListItem
                   key={todo.id}
@@ -40,7 +38,7 @@ class TodoList extends Component {
                   leftCheckbox={
                     <Checkbox
                       checked={todo.completed}
-                      onCheck={e => this.handleCheck(todo, e)}
+                      onCheck={e => handleCheck(todo, e)}
                     />
                   }
                   innerDivStyle={{
@@ -50,12 +48,12 @@ class TodoList extends Component {
                   }}
                 />
               );
-            })}
+            })
+            ): ('')}
           </List>
         </Paper>
       </Div>
     );
   }
-}
 
 export default TodoList;

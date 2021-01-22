@@ -4,11 +4,10 @@ import './App.css';
 import ImageMapper from "react-image-mapper"
 import Popup from './Popup';
 import Note from './Note';
-import clues from "./clues.json";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import TodoForm from "./TodoForm";
 import AppBar from "material-ui/AppBar";
-
+import TodoList from './TodoList';
 
 function App() {
 
@@ -19,12 +18,56 @@ function App() {
   
   const [isOpen, setIsOpen] = useState(false);
   const [popupContent, setPopupContent] = useState({name: '', content: ''});
+  const [todos, setTodos] = useState([]);
+  const [todoText, setTodoText] = useState('');
+
+  const handleSubmit = () => {
+
+    console.log(...todos);
+
+    setTodos(...todos,
+      {
+        todoText: todoText,
+        id: todos.length + 1,
+        completed: false,
+      }
+    );
+
+    clearTodoText();
+  }
+
+  const clearTodoText = () => {
+    setTodoText('');
+  }
+
+  const handleChange = (title) => {
+    setTodoText(title);
+  }
+
+  const handleListItemClicked = (todo) => {
+    console.log(todo, 'handleListItemCLicked');
+    let todosInState = todos;
+    let todoIndex = todo.id - 1;
+    console.log(todoIndex);
+
+    if (todosInState.indexOf(todo) !== -1) {
+      let todoState = todosInState[todoIndex];
+      todoState.completed = !todo.completed;
+
+      todosInState[todoIndex] = todoState;
+      console.log(todosInState, 'hree');
+
+      setTodos( todosInState );
+    }
+  }
 
   const clickHandler = (area) => {
     console.log(area);
     setIsOpen(!isOpen);
     setPopupContent({name: area.name, content: renderSwitch(area.title)});
     setIsComponentVisible(true);
+    handleChange(area.title)
+    handleSubmit(area);
 
   }
 
@@ -182,7 +225,6 @@ function App() {
     
   ];
 
-
   return (
     <div className="App">
       <div className="title">THE DENTIST</div>
@@ -190,8 +232,10 @@ function App() {
           <div className="notes">
             <MuiThemeProvider>
               <div style={styles}>
-                <AppBar title="React Todo" showMenuIconButton={false} />
-                <TodoForm />
+                <TodoList
+                    todos={todos}
+                    onListItemClicked={handleListItemClicked}
+                  />
               </div>
             </MuiThemeProvider>
             {/* {notes.map(note => (
