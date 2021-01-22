@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import room from './bg.png';
+import room from './dentist.png';
 import './App.css';
 import ImageMapper from "react-image-mapper"
 import Popup from './Popup';
@@ -213,7 +213,7 @@ function App() {
     <div className="App">
       <div className="title">THE DENTIST</div>
         <div className="container">
-          <div className="notes">
+          <div className="col">
             <MuiThemeProvider>
               <div style={styles}>
                 <TodoList
@@ -227,7 +227,21 @@ function App() {
             ))} */}
           </div>
           
-          <div className="popup" ref={ref}>
+          <div className="col">
+            <ImageMapper 
+              onClick={area => clickHandler(area)}
+              onMouseEnter={area => enterArea(area)}
+              onMouseLeave={area => leaveArea(area)} 
+              src={room} 
+              map={map}
+              // width={800}
+              // imgWidth={800} 
+              lineWidth={0.1}
+              fillColor="rgba(0,0,0,0.001)"
+            />
+          </div>
+
+          <div className="col" ref={ref}>
             {isOpen && isComponentVisible &&
             <Popup
               content={
@@ -239,18 +253,6 @@ function App() {
               handleClose={clickHandler}
             />}
           </div>
-          <ImageMapper 
-            data-tip data-for="registerTip"
-            onClick={area => clickHandler(area)}
-            onMouseEnter={area => enterArea(area)}
-            onMouseLeave={area => leaveArea(area)} 
-            src={room} 
-            map={map}
-            width={800}
-            imgWidth={800} 
-            lineWidth={0.1}
-            fillColor="rgba(0,0,0,0.001)"
-          />
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import Paper from 'material-ui/Paper';
 import styled from 'styled-components';
 
 const Div = styled.div`
-  width: 50%;
+  width: 90%;
   margin: 0 auto;
   display: block;
 `;
