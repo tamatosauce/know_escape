@@ -7,6 +7,7 @@ import Note from './Note';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import TodoForm from "./TodoForm";
 import AppBar from "material-ui/AppBar";
+import Button from '@material-ui/core/Button';
 import TodoList from './TodoList';
 
 function App() {
@@ -44,24 +45,69 @@ function App() {
     setPopupContent({name: area.name, content: renderSwitch(area.title)});
     setIsComponentVisible(true);
 
-    //notes
-    setTodoText(area.name);
+    console.log(getClueFromObject(area.title), 'wut');
 
-    const inputVal = {todoText: area.name, id: todos.length + 1, completed: false}
-    setTodos([...todos, inputVal]);
+   
 
-    console.log(todos, 'wut');
-    setTodoText('');
+    
+  }
 
+  const addClueToList = (title) => {
+     //notes
+     setTodoText(getClueFromObject(title));
+
+     const inputVal = {todoText: getClueFromObject(title), id: todos.length + 1, completed: false}
+     setTodos([...todos, inputVal]);
+ 
+     console.log(todos, 'wut');
+     setTodoText('');
   }
 
   const enterArea = (area) => {
     console.log(area);
-
   }
 
   const leaveArea = (area) => {
     console.log(area);
+  }
+
+  const showClue = (name) => {
+    console.log(name, 'showClue');
+    // setTodoText(getClueFromObject(name));
+
+    // const inputVal = {todoText: name, id: todos.length + 1, completed: false}
+    // setTodos([...todos, inputVal]);
+
+    // console.log(todos, 'wut');
+    // setTodoText('');
+  }
+
+  const showImage = (name) => {
+    console.log(name, 'showImage');
+  }
+
+  const getClueFromObject = (param) => {
+    console.log(param, 'getClueFromObject')
+    switch(param) {
+      case 'sink':
+        return "DEMILAC MEDICAL"
+      case 'degree_1':
+        return "Degree 1 \n DDS \n Riverwood Dental School \n Exelton University \n Natura ingenium disecta \n Awarded to \n Michael Stephens \n Executed by \n Lauren Grant \n Degree 2 \n Eesgni lekesesnot erriuqse pusreivnois"
+      case 'denture':
+        return "Denture \n Model 1 - Missing Tooth \n Model 2 - Crack Central Incisor \n  Model 3 - loose filling \n Model - 4 all of the above"
+      case 'wheelie_chair':
+        return "Chair Note \n Door Emergency Release Look For Hot Spot"
+      case 'red_chair':
+        return "Computer Chair \n Without even trying you can see three things wrong with it. First the wheels have fallen off, so it scrapes across the floor. Second, one of the armrests are shorter than the other. And third, the fabric on the back rest is two different colours - most of it is red but there's a shiny black patch near the bottom. It's as if who ever built this wasn't even trying."
+      case 'dual_cupboards':
+        return "Book \n Often, only every third issue that comes up is relevant. In dentistry, a patient's third complaint will be the most important. In carpentry, the third mechanical oddity is the first that needs fixing"
+      case 'computer':
+        return "Patients \n Ericson: Upper Central Incisor Crack \n Molvis: Upper Second Molar Root Canal \n Wussel: Lower Cuspid Crack"
+      case 'red_chair':
+        return "FLBARLXNENAACACNZH"
+      default: 
+        return 'foo';
+    }
   }
 
   const renderSwitch = (param) => {
@@ -156,59 +202,6 @@ function App() {
     ]
   }
 
-  const notes = [
-    {
-      key: 1,
-      title: "DEMILAC MEDICAL",
-      content:
-        ""
-    },
-    {
-      key: 2,
-      title: "Degree 1",
-      content:
-        "DDS \n Riverwood Dental School \n Exelton University \n Natura ingenium disecta \n Awarded to \n Michael Stephens \n Executed by \n Lauren Grant"
-    },
-    {
-      key: 3,
-      title: "Degree 2",
-      content:
-        "Eesgni lekesesnot erriuqse pusreivnois"
-    },
-    {
-      key: 4,
-      title: "Denture",
-      content:
-        "Model 1 - Missing Tooth \n Model 2 - Crack Central Incisor \n  Model 3 - loose filling \n Model - 4 all of the above "
-    },
-    {
-      key: 5,
-      title: "Chair Note",
-      content: "Door Emergency Release Look For Hot Spot"
-    },
-    {
-      key: 6,
-      title: "Computer Chair",
-      content: "Without even trying you can see three things wrong with it. First the wheels have fallen off, so it scrapes across the floor. Second, one of the armrests are shorter than the other. And third, the fabric on the back rest is two different colours - most of it is red but there's a shiny black patch near the bottom. It's as if who ever built this wasn't even trying."
-    },
-    {
-      key: 7,
-      title: "Book",
-      content: "Often, only every third issue that comes up is relevant. In dentistry, a patient's third complaint will be the most important. In carpentry, the third mechanical oddity is the first that needs fixing."
-    },
-    {
-      key: 8,
-      title: "Patients",
-      content: "Ericson: Upper Central Incisor Crack \n Molvis: Upper Second Molar Root Canal \n Wussel: Lower Cuspid Crack"
-    },
-    {
-      key: 9,
-      title: "FLBARLXNENAACACNZH",
-      content: ""
-    }
-    
-  ];
-
   return (
     <div className="App">
       <div className="title">THE DENTIST</div>
@@ -234,13 +227,22 @@ function App() {
               onMouseLeave={area => leaveArea(area)} 
               src={room} 
               map={map}
-              // width={800}
-              // imgWidth={800} 
+              width={800}
+              imgWidth={800} 
               lineWidth={0.1}
               fillColor="rgba(0,0,0,0.001)"
             />
+            <div className="container">
+               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('sink')}>Sink Towels</Button></div>
+               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('degree_1')}>Degrees</Button></div>
+               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('denture')}>Denture</Button></div>
+               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('wheelie_chair')}>Wheelie Chair</Button></div>
+               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('red_chair')}>Red Chair</Button></div>
+               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('dual_cupboards')}>Under Cupboards</Button></div>
+               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('computer')}>Computer</Button></div>
+               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('red_chair')}>Other Red Chair</Button></div>
+            </div>
           </div>
-
           <div className="col" ref={ref}>
             {isOpen && isComponentVisible &&
             <Popup
@@ -248,10 +250,12 @@ function App() {
               <>
                 <b>{popupContent.name}</b>
                 <p>{popupContent.content}</p>
+                
               </>
             }
               handleClose={clickHandler}
-            />}
+            />
+            }
           </div>
       </div>
     </div>

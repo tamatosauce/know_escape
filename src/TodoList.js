@@ -45,6 +45,9 @@ const TodoList = (props) => {
                     textAlign: 'left',
                     textDecoration: todo.completed ? 'line-through' : '',
                     color: todo.completed ? 'red' : 'inherit',
+                    fontSize: '1.5vw',
+                    lineHeight: '4vh',
+                    padding: '16px 16px 16px 45px',
                   }}
                 />
               );
