@@ -29,25 +29,21 @@ const TodoList = (props) => {
       <Div visible={props.todos.length === 0 ? 'none' : 'block'}>
         <Paper zDepth={2} rounded={false}>
           <List>
-            { todos != "" && todos.todoText !== "" ? (todos.map(todo => {
+            {todos != "" && todos.todoText !== "" ? (todos.map(todo => {
               console.log(todo, 'todo');
               return (
                 <ListItem
                   key={todo.id}
                   primaryText={todo.todoText}
-                  leftCheckbox={
-                    <Checkbox
-                      checked={todo.completed}
-                      onCheck={e => handleCheck(todo, e)}
-                    />
-                  }
                   innerDivStyle={{
                     textAlign: 'left',
                     textDecoration: todo.completed ? 'line-through' : '',
                     color: todo.completed ? 'red' : 'inherit',
-                    fontSize: '1.5vw',
-                    lineHeight: '4vh',
+                    fontSize: '1.2vw',
+                    lineHeight: '3vh',
+                    wordSpacing: '100vw',
                     padding: '16px 16px 16px 45px',
+                    width: '100%',
                   }}
                 />
               );

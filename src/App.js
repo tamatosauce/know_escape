@@ -40,27 +40,46 @@ function App() {
   }
 
   const clickHandler = (area) => {
+
+    if (area.todoText)
     console.log('click handler');
     setIsOpen(!isOpen);
     setPopupContent({name: area.name, content: renderSwitch(area.title)});
     setIsComponentVisible(true);
 
     console.log(getClueFromObject(area.title), 'wut');
-
-   
-
-    
   }
 
   const addClueToList = (title) => {
-     //notes
-     setTodoText(getClueFromObject(title));
 
-     const inputVal = {todoText: getClueFromObject(title), id: todos.length + 1, completed: false}
-     setTodos([...todos, inputVal]);
- 
-     console.log(todos, 'wut');
-     setTodoText('');
+    const filtered = todos.filter(entry => Object.values(entry).some(val => typeof val === "string" && val.includes(title)));
+    console.log(filtered, 'filteres');
+   
+    if(todos.length == 0) {
+     
+      console.log(filtered, 'filteres');
+      //notes
+      setTodoText(getClueFromObject(title));
+
+      const inputVal = {todoText: getClueFromObject(title), id: title, completed: false}
+      setTodos([...todos, inputVal]);
+  
+      console.log(todos, 'wut');
+      setTodoText('');
+    } else if(filtered.length > 0) {
+      console.log(todos[0].id, title, 'dfkjsdlfjk;');
+       const someArray = todos.filter(todo => todo.id != title);
+       setTodos(someArray);
+    }else {
+      console.log('else');
+      setTodoText(getClueFromObject(title));
+
+      const inputVal = {todoText: getClueFromObject(title), id: title, completed: false}
+      setTodos([...todos, inputVal]);
+  
+      console.log(todos, 'wut');
+      setTodoText('');
+    }
   }
 
   const enterArea = (area) => {
@@ -92,7 +111,9 @@ function App() {
       case 'sink':
         return "DEMILAC MEDICAL"
       case 'degree_1':
-        return "Degree 1 \n DDS \n Riverwood Dental School \n Exelton University \n Natura ingenium disecta \n Awarded to \n Michael Stephens \n Executed by \n Lauren Grant \n Degree 2 \n Eesgni lekesesnot erriuqse pusreivnois"
+        return "Degree 1 \n DDS \n Riverwood Dental School \n Exelton University \n Natura ingenium disecta \n Awarded to \n Michael Stephens \n Executed by \n Lauren Grant"
+      case 'degree_2':
+        return "Degree 2 \n Eesgni lekesesnot erriuqse pusreivnois"
       case 'denture':
         return "Denture \n Model 1 - Missing Tooth \n Model 2 - Crack Central Incisor \n  Model 3 - loose filling \n Model - 4 all of the above"
       case 'wheelie_chair':
@@ -215,11 +236,7 @@ function App() {
                   />
               </div>
             </MuiThemeProvider>
-            {/* {notes.map(note => (
-              <Note key={note.key} title={note.title} content={note.content} />
-            ))} */}
           </div>
-          
           <div className="col">
             <ImageMapper 
               onClick={area => clickHandler(area)}
@@ -233,8 +250,9 @@ function App() {
               fillColor="rgba(0,0,0,0.001)"
             />
             <div className="container">
-               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('sink')}>Sink Towels</Button></div>
-               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('degree_1')}>Degrees</Button></div>
+               <div className="col"><Button padding="5px" variant="contained" color="secondary" onClick={() => addClueToList('sink')}>Sink Towels</Button></div>
+               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('degree_1')}>Degree 1</Button></div>
+               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('degree_2')}>Degree 2</Button></div>
                <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('denture')}>Denture</Button></div>
                <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('wheelie_chair')}>Wheelie Chair</Button></div>
                <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('red_chair')}>Red Chair</Button></div>
