@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import room from './dentist.png';
+import room from './bg.png';
 import './App.css';
 import ImageMapper from "react-image-mapper"
 import Popup from './Popup';
@@ -20,7 +20,15 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [popupContent, setPopupContent] = useState({name: '', content: ''});
   const [todos, setTodos] = useState([]);
-  const [todoText, setTodoText] = useState('');
+  const [sinkBtn, setSinkBtn] = useState(false);
+  const [degree1Btn, setDegree1Btn] = useState(false);
+  const [degree2Btn, setDegree2Btn] = useState(false);
+  const [dentureBtn, setDentureBtn] = useState(false);
+  const [wheelieBtn, setWheelieBtn] = useState(false);
+  const [redChairBtn, setRedChairBtn] = useState(false);
+  const [dualCupboardsBtn, setDualCupboardsBtn] = useState(false);
+  const [computerBtn, setComputerBtn] = useState(false);
+  const [red_chair_gasBtn, setRedChairGasBtn] = useState(false);
 
   const handleListItemClicked = (todo) => {
     console.log(todo, 'handleListItemCLicked');
@@ -52,33 +60,41 @@ function App() {
 
   const addClueToList = (title) => {
 
+    btnManager(title);
+
     const filtered = todos.filter(entry => Object.values(entry).some(val => typeof val === "string" && val.includes(title)));
     console.log(filtered, 'filteres');
    
-    if(todos.length == 0) {
-     
-      console.log(filtered, 'filteres');
-      //notes
-      setTodoText(getClueFromObject(title));
+    if(todos.length === 0) {
 
-      const inputVal = {todoText: getClueFromObject(title), id: title, completed: false}
-      setTodos([...todos, inputVal]);
+      //notes
+      // setTodoText(getClueFromObject(title));
+      if (title === 'degree_1') {
+        const inputVal = {todoText: getClueFromObject(title), id: title, wordSpacing: '100vw'};
+        setTodos([...todos, inputVal]);
+
+      }else {
+        const inputVal = {todoText: getClueFromObject(title), id: title, completed: false};
+        setTodos([...todos, inputVal]);
+      }
+
   
       console.log(todos, 'wut');
-      setTodoText('');
+      // setTodoText('');
     } else if(filtered.length > 0) {
       console.log(todos[0].id, title, 'dfkjsdlfjk;');
-       const someArray = todos.filter(todo => todo.id != title);
+       const someArray = todos.filter(todo => todo.id !== title);
        setTodos(someArray);
     }else {
       console.log('else');
-      setTodoText(getClueFromObject(title));
+      if (title === 'degree_1') {
+        const inputVal = {todoText: getClueFromObject(title), id: title, wordSpacing: '100vw'};
+        setTodos([...todos, inputVal]);
 
-      const inputVal = {todoText: getClueFromObject(title), id: title, completed: false}
-      setTodos([...todos, inputVal]);
-  
-      console.log(todos, 'wut');
-      setTodoText('');
+      }else {
+        const inputVal = {todoText: getClueFromObject(title), id: title, completed: false};
+        setTodos([...todos, inputVal]);
+      }
     }
   }
 
@@ -109,22 +125,22 @@ function App() {
     console.log(param, 'getClueFromObject')
     switch(param) {
       case 'sink':
-        return "DEMILAC MEDICAL"
+        return "Towels - DEMILAC MEDICAL"
       case 'degree_1':
-        return "Degree 1 \n DDS \n Riverwood Dental School \n Exelton University \n Natura ingenium disecta \n Awarded to \n Michael Stephens \n Executed by \n Lauren Grant"
+        return "DDS \n Riverwood \n Exelton \n Natura \n Awarded \n Michael \n Executed \n Lauren"
       case 'degree_2':
-        return "Degree 2 \n Eesgni lekesesnot erriuqse pusreivnois"
+        return "Degree 2 - Eesgni lekesesnot erriuqse pusreivnois"
       case 'denture':
-        return "Denture \n Model 1 - Missing Tooth \n Model 2 - Crack Central Incisor \n  Model 3 - loose filling \n Model - 4 all of the above"
+        return "Denture - Model 1 - Missing Tooth \n Model 2 - Crack Central Incisor \n  Model 3 - loose filling \n Model - 4 all of the above"
       case 'wheelie_chair':
-        return "Chair Note \n Door Emergency Release Look For Hot Spot"
+        return "Chair Note - Door Emergency Release Look For Hot Spot"
       case 'red_chair':
-        return "Computer Chair \n Without even trying you can see three things wrong with it. First the wheels have fallen off, so it scrapes across the floor. Second, one of the armrests are shorter than the other. And third, the fabric on the back rest is two different colours - most of it is red but there's a shiny black patch near the bottom. It's as if who ever built this wasn't even trying."
+        return "Computer Chair - Without even trying you can see three things wrong with it. First the wheels have fallen off, so it scrapes across the floor. Second, one of the armrests are shorter than the other. And third, the fabric on the back rest is two different colours - most of it is red but there's a shiny black patch near the bottom. It's as if who ever built this wasn't even trying."
       case 'dual_cupboards':
-        return "Book \n Often, only every third issue that comes up is relevant. In dentistry, a patient's third complaint will be the most important. In carpentry, the third mechanical oddity is the first that needs fixing"
+        return "Book - Often, only every third issue that comes up is relevant. In dentistry, a patient's third complaint will be the most important. In carpentry, the third mechanical oddity is the first that needs fixing"
       case 'computer':
-        return "Patients \n Ericson: Upper Central Incisor Crack \n Molvis: Upper Second Molar Root Canal \n Wussel: Lower Cuspid Crack"
-      case 'red_chair':
+        return "Patients - Ericson: Upper Central Incisor Crack \n Molvis: Upper Second Molar Root Canal \n Wussel: Lower Cuspid Crack"
+      case 'red_chair_gas':
         return "FLBARLXNENAACACNZH"
       default: 
         return 'foo';
@@ -174,6 +190,32 @@ function App() {
     }
   }
 
+  const btnManager = (param) => {
+    switch(param) {
+      case 'sink':
+        return setSinkBtn(!sinkBtn)
+      case 'degree_1':
+        return setDegree1Btn(!degree1Btn)
+      case 'degree_2':
+        return setDegree2Btn(!degree2Btn)
+      case 'denture':
+        return setDentureBtn(!dentureBtn)
+      case 'wheelie_chair':
+        return setWheelieBtn(!wheelieBtn)
+      case 'red_chair':
+        return setRedChairBtn(!redChairBtn)
+      case 'dual_cupboards':
+        return setDualCupboardsBtn(!dualCupboardsBtn)
+      case 'computer':
+        return setComputerBtn(!computerBtn)
+      case 'red_chair_gas':
+        return setRedChairGasBtn(!red_chair_gasBtn)
+      default: 
+        return 'foo';
+    }
+  }
+
+
   const useComponentVisible = (initialIsVisible) => {
     const [isComponentVisible, setIsComponentVisible] = useState(
       initialIsVisible
@@ -193,6 +235,7 @@ function App() {
     return { ref, isComponentVisible, setIsComponentVisible };
   }
 
+
   const {
     ref,
     isComponentVisible,
@@ -202,24 +245,24 @@ function App() {
   const map = {
     name: "dentist",
     areas: [
-      { name: "X-ray", title: "xray", shape: "rect", coords: [159,105,234,169], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Recliner", title: "recliner", shape: "rect", coords: [492,258,625,487], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Red Chair", title: "red_chair", shape: "rect", coords: [221,193,331,314], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Computer", title: "computer", shape: "rect", coords: [168,37,420,86], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Medicine Cabinet", title: "medicine_cabinet", shape: "rect", coords: [39,482,121,610], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Gas", title: "gas", shape: "rect", coords: [91,614,374,746], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "1st Degree", title: "degree_1", shape: "rect", coords: [459,24,524,55], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "2nd Degree", title: "degree_2", shape: "rect", coords: [574,25,637,59], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Instruments", title: "instruments", shape: "rect", coords: [630,258,780,366], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Mobile Sink", title: "mobile_sink", shape: "rect", coords: [632,374,773,483], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Denture", title: "denture", shape: "rect", coords: [1096,75,1173,148], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Sink", title: "sink", shape: "rect", coords: [1094,197,1171,343], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Sink Cupboards", title: "cupboards", shape: "rect", coords: [1085,225,1067,305], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Wheelie Chair", title: "wheelie_chair", shape: "circle", coords: [835,392,40], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "X-ray Machine", title: "xray_machine", shape: "rect", coords: [570,89,685,190], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Bookshelf", title: "bookshelf", shape: "rect", coords: [897,55,1082,98], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Dual Cupboards", title: "dual_cupboards", shape: "rect", coords: [904,173,1081,187], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
-      { name: "Door", title: "door", shape: "rect", coords: [870,735,1138,776], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "X-ray", title: "xray", shape: "poly", coords: [113,87,122,126,170,114,161,72], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Recliner", title: "recliner", shape: "poly", coords: [404,358,446,353,446,196,423,186,422,154,360,154,361,241,341,241,343,331,365,331,366,350], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Red Chair", title: "red_chair", shape: "poly", coords: [173,136,244,148,236,199,236,226,194,226,154,213,164,186], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Computer", title: "computer", shape: "poly", coords: [111,26,308,26,285,70,139,70], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Medicine Cabinet", title: "medicine_cabinet", shape: "poly", coords: [26,348,73,349,89,354,89,438,73,442,28,444], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Gas", title: "gas", shape: "poly", coords: [272,529,261,437,92,443,55,529,167,538], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "1st Degree", title: "degree_1", shape: "poly", coords: [314,15,392,15,384,45,323,45], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "2nd Degree", title: "degree_2", shape: "poly", coords: [395,16,474,16,464,45,405,45], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Instruments", title: "instruments", shape: "poly", coords: [456,192,552,191,551,257,456,258], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Mobile Sink", title: "mobile_sink", shape: "poly", coords: [458,273,553,270,553,340,457,341], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Denture", title: "denture", shape: "poly", coords: [801,51,845,62,841,100,811,113,790,100,786,74], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Sink", title: "sink", shape: "poly", coords: [790,145,839,145,839,245,790,245], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Sink Cupboards", title: "cupboards", shape: "poly", coords: [765,213,782,253,781,142,765,171], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Wheelie Chair", title: "wheelie_chair", shape: "circle", coords: [601,283,34], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "X-ray Machine", title: "xray_machine", shape: "poly", coords: [425,62,478,62,479,86,495,104,558,104,559,131,535,131,535,152,507,151,506,139,471,139,472,184,430,186,428,141,408,140,407,87,425,86], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Bookshelf", title: "bookshelf", shape: "poly", coords: [646,42,777,43,777,70,645,68], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Dual Cupboards", title: "dual_cupboards", shape: "poly", coords: [647,125,665,140,695,140,712,124,777,127,759,140,728,140,713,125], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
+      { name: "Door", title: "door", shape: "poly", coords: [619,533,819,534,818,563,620,567], preFillColor: "rgba(0,0,0,0.001)", fillColor: "rgba(0,0,0,0.2)" },
     ]
   }
 
@@ -244,21 +287,19 @@ function App() {
               onMouseLeave={area => leaveArea(area)} 
               src={room} 
               map={map}
-              width={800}
-              imgWidth={800} 
               lineWidth={0.1}
               fillColor="rgba(0,0,0,0.001)"
             />
             <div className="container">
-               <div className="col"><Button padding="5px" variant="contained" color="secondary" onClick={() => addClueToList('sink')}>Sink Towels</Button></div>
-               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('degree_1')}>Degree 1</Button></div>
-               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('degree_2')}>Degree 2</Button></div>
-               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('denture')}>Denture</Button></div>
-               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('wheelie_chair')}>Wheelie Chair</Button></div>
-               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('red_chair')}>Red Chair</Button></div>
-               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('dual_cupboards')}>Under Cupboards</Button></div>
-               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('computer')}>Computer</Button></div>
-               <div className="col"><Button variant="contained" color="secondary" onClick={() => addClueToList('red_chair')}>Other Red Chair</Button></div>
+               <div className="col pbtn"><Button padding="5px" variant="contained" color={sinkBtn ? 'primary' : 'secondary'} onClick={() => addClueToList('sink')}>Sink Towels</Button></div>
+               <div className="col pbtn"><Button variant="contained" color={degree1Btn ? 'primary' : 'secondary'} onClick={() => addClueToList('degree_1')}>Degree 1</Button></div>
+               <div className="col pbtn"><Button variant="contained" color={degree2Btn ? 'primary' : 'secondary'} onClick={() => addClueToList('degree_2')}>Degree 2</Button></div>
+               <div className="col pbtn"><Button variant="contained" color={dentureBtn ? 'primary' : 'secondary'} onClick={() => addClueToList('denture')}>Denture Model</Button></div>
+               <div className="col pbtn"><Button variant="contained" color={wheelieBtn ? 'primary' : 'secondary'} onClick={() => addClueToList('wheelie_chair')}>Wheelie Chair</Button></div>
+               <div className="col pbtn"><Button variant="contained" color={redChairBtn ? 'primary' : 'secondary'} onClick={() => addClueToList('red_chair')}>Red Chair</Button></div>
+               <div className="col pbtn"><Button variant="contained" color={dualCupboardsBtn ? 'primary' : 'secondary'} onClick={() => addClueToList('dual_cupboards')}>Under Cupboards</Button></div>
+               <div className="col pbtn"><Button variant="contained" color={computerBtn ? 'primary' : 'secondary'} onClick={() => addClueToList('computer')}>Computer Patients</Button></div>
+               <div className="col pbtn"><Button variant="contained" color={red_chair_gasBtn ? 'primary' : 'secondary'} onClick={() => addClueToList('red_chair_gas')}>Black Spot</Button></div>
             </div>
           </div>
           <div className="col" ref={ref}>

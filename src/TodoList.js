@@ -8,7 +8,11 @@ const Div = styled.div`
   width: 90%;
   margin: 0 auto;
   display: block;
+  h2 {padding-bottom: 15px}
 `;
+
+const Mylist = styled(List)({ padding: '0px' });
+
 
 const TodoList = (props) => {
 
@@ -28,7 +32,8 @@ const TodoList = (props) => {
     return (
       <Div visible={props.todos.length === 0 ? 'none' : 'block'}>
         <Paper zDepth={2} rounded={false}>
-          <List>
+          <List style={{padding: '8px 0px 0px 0px'}}>
+            <h2>CLUES</h2>
             {todos != "" && todos.todoText !== "" ? (todos.map(todo => {
               console.log(todo, 'todo');
               return (
@@ -40,10 +45,11 @@ const TodoList = (props) => {
                     textDecoration: todo.completed ? 'line-through' : '',
                     color: todo.completed ? 'red' : 'inherit',
                     fontSize: '1.2vw',
-                    lineHeight: '3vh',
-                    wordSpacing: '100vw',
-                    padding: '16px 16px 16px 45px',
-                    width: '100%',
+                    lineHeight: '4vh',
+                    wordSpacing: todo.wordSpacing,
+                    padding: '16px 0px 10px 20px',
+                    width: '70%',
+                    borderTop: '1px solid #000',
                   }}
                 />
               );

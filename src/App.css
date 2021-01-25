@@ -53,8 +53,8 @@ body {
 }
 
 .popup-box {
-  z-index: 950;
-  width: 100%;
+  /* z-index: 950;
+  width: 100%; */
 }
 
 .mapper {
