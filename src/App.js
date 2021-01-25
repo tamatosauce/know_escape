@@ -20,15 +20,15 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [popupContent, setPopupContent] = useState({name: '', content: ''});
   const [todos, setTodos] = useState([]);
-  const [sinkBtn, setSinkBtn] = useState(false);
-  const [degree1Btn, setDegree1Btn] = useState(false);
-  const [degree2Btn, setDegree2Btn] = useState(false);
-  const [dentureBtn, setDentureBtn] = useState(false);
-  const [wheelieBtn, setWheelieBtn] = useState(false);
-  const [redChairBtn, setRedChairBtn] = useState(false);
-  const [dualCupboardsBtn, setDualCupboardsBtn] = useState(false);
-  const [computerBtn, setComputerBtn] = useState(false);
-  const [red_chair_gasBtn, setRedChairGasBtn] = useState(false);
+  const [sinkBtn, setSinkBtn] = useState(true);
+  const [degree1Btn, setDegree1Btn] = useState(true);
+  const [degree2Btn, setDegree2Btn] = useState(true);
+  const [dentureBtn, setDentureBtn] = useState(true);
+  const [wheelieBtn, setWheelieBtn] = useState(true);
+  const [redChairBtn, setRedChairBtn] = useState(true);
+  const [dualCupboardsBtn, setDualCupboardsBtn] = useState(true);
+  const [computerBtn, setComputerBtn] = useState(true);
+  const [red_chair_gasBtn, setRedChairGasBtn] = useState(true);
 
   const handleListItemClicked = (todo) => {
     console.log(todo, 'handleListItemCLicked');
